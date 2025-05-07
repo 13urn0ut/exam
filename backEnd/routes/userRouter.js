@@ -11,9 +11,11 @@ const {
   getMe,
   deleteUser,
 } = require("../controllers/userController");
+const { checkSignupBody } = require("../validators/checkUserBody");
+const validate = require("../validators/validate");
 
 userRouter.route("/").get(getAllUsers);
-userRouter.route("/signup").post(signupUser);
+userRouter.route("/signup").post(checkSignupBody, validate, signupUser);
 userRouter.route("/login").post(loginUser);
 userRouter.route("/logout").post(protect, logoutUser);
 userRouter.route("/me").get(getMe);
