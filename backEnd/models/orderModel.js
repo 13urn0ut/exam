@@ -1,8 +1,8 @@
 const { sequelize, DataTypes, Model } = require("../DB/connectDB");
 
-class UserItem extends Model {}
+class Order extends Model {}
 
-UserItem.init(
+Order.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -16,4 +16,4 @@ UserItem.init(
   }
 );
 
-module.exports = { UserItem };
+module.exports = { Order };

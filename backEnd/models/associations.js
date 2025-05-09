@@ -2,7 +2,8 @@ const { Item } = require("./itemModel");
 const { Category } = require("./categoryModel");
 const { Date } = require("./dateModel");
 const { User } = require("./userModel");
-const { UserItem } = require("./userItemModel");
+const { Order } = require("./orderModel");
+const { Review } = require("./reviewModel");
 
 Category.hasMany(Item);
 Item.belongsTo(Category);
@@ -10,8 +11,14 @@ Item.belongsTo(Category);
 Item.belongsToMany(Date, { through: "item_date" });
 Date.belongsToMany(Item, { through: "item_date" });
 
-User.hasMany(UserItem);
-UserItem.belongsTo(User);
+User.hasMany(Order);
+Order.belongsTo(User);
 
-Item.hasMany(UserItem);
-UserItem.belongsTo(Item);
+Item.hasMany(Order);
+Order.belongsTo(Item);
+
+User.hasMany(Review);
+Review.belongsTo(User);
+
+Item.hasMany(Review);
+Review.belongsTo(Item);
