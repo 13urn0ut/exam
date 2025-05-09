@@ -16,6 +16,7 @@ const {
   checkLoginBody,
   checkUpdateUserBody,
 } = require("../validators/checkUserBody");
+const { checkUserId } = require("../validators/checkUserParams");
 const validate = require("../validators/validate");
 
 userRouter.route("/").get(protect, allowAccessTo("admin"), getAllUsers);
@@ -25,8 +26,9 @@ userRouter.route("/logout").post(protect, logoutUser);
 userRouter.route("/me").get(getMe);
 userRouter
   .route("/:id")
-  .get(protect, getUserById)
-  .patch(protect, checkUpdateUserBody, validate, updateUser)
-  .delete(protect, deleteUser);
+  .all(protect, checkUserId)
+  .get(validate, getUserById)
+  .patch(checkUpdateUserBody, validate, updateUser)
+  .delete(validate, deleteUser);
 
 module.exports = userRouter;

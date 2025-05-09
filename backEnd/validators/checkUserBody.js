@@ -65,7 +65,7 @@ exports.checkLoginBody = [
           (field) =>
             `Unknown field ${field.path} in ${field.location} with value ${field.value}`
         )
-        .join(", "),
+        .join("; "),
   }),
 ];
 
@@ -88,7 +88,7 @@ exports.checkUpdateUserBody = [
     const user = await User.findByPk(req.params.id);
 
     if (!user || !(await argon2.verify(user.password, value))) {
-      throw new AppError("Incorrect password", 401);
+      throw new Error("Incorrect password");
     }
     return true;
   }),
@@ -100,7 +100,7 @@ exports.checkUpdateUserBody = [
     .withMessage("Password must be at least 8 characters long")
     .custom((value, { req }) => {
       if (value !== req.body.newPasswordConfirm) {
-        throw new Error("Passwords do not match");
+        throw new AppError("Incorrect email or password", 401);
       }
       return true;
     }),
@@ -114,6 +114,6 @@ exports.checkUpdateUserBody = [
           (field) =>
             `Unknown field ${field.path} in ${field.location} with value ${field.value}`
         )
-        .join(", "),
+        .join("; "),
   }),
 ];
