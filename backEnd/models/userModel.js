@@ -17,6 +17,9 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -26,6 +29,9 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "user",
+      validate: {
+        isIn: [["user", "admin"]],
+      },
     },
   },
   { sequelize, modelName: "user" }

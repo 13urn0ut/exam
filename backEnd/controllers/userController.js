@@ -39,12 +39,8 @@ exports.signupUser = async (req, res, next) => {
 
 exports.loginUser = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email } = req.body;
     const user = await User.findOne({ where: { email } });
-
-    if (!user || !(await argon2.verify(user.password, password))) {
-      throw new AppError("Incorrect email or password", 401);
-    }
 
     sendCookie(user, res);
 
@@ -103,13 +99,16 @@ exports.allowAccessTo = (...roles) => {
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({ order: [["createdAt", "DESC"]] });
+    const userCount = await User.count();
 
     users.forEach((user) => {
       user.password = undefined;
     });
 
-    res.status(200).json({ status: "success", data: users });
+    res
+      .status(200)
+      .json({ status: "success", results: userCount, data: users });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
@@ -147,7 +146,14 @@ exports.getUserById = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    await user.update(req.body);
+
+    await user.update({
+      email: req.body.email || user.email,
+      password: req.body.newPassword
+        ? await argon2.hash(req.body.newPassword)
+        : user.password,
+    });
+
     user.password = undefined;
     res.status(200).json({ status: "success", data: user });
   } catch (error) {
