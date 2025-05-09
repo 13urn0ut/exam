@@ -1,14 +1,19 @@
 const itemRouter = require("express").Router();
 const {
   getAllItems,
-  // getItemById,
+  getItemById,
   createItem,
-  // updateItem,
-  // deleteItem,
+  updateItem,
+  deleteItem,
 } = require("../controllers/itemController");
+const { protect, allowAccessTo } = require("../controllers/userController");
 
 itemRouter.route("/").get(getAllItems);
-itemRouter.route("/").post(createItem);
-// itemRouter.route("/:id").get(getItemById).patch(updateItem).delete(deleteItem);
+itemRouter.route("/").post(protect, allowAccessTo("admin"), createItem);
+itemRouter
+  .route("/:id")
+  .get(getItemById)
+  .patch(protect, allowAccessTo("admin"), updateItem)
+  .delete(protect, allowAccessTo("admin"), deleteItem);
 
 module.exports = itemRouter;
