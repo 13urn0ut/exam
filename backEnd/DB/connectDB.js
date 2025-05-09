@@ -12,22 +12,15 @@ const sequelize = new Sequelize(
 );
 
 const connectDB = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-    await sequelize.sync({ alter: true });
-  } catch (error) {
-    throw error;
-  }
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+  await sequelize.sync({ alter: true });
+  console.log("All models were synchronized successfully.");
 };
 
 const closeDB = async () => {
-  try {
-    await sequelize.close();
-    console.log("Connection has been closed successfully.");
-  } catch (error) {
-    throw error;
-  }
+  await sequelize.close();
+  console.log("Connection has been closed successfully.");
 };
 
 module.exports = { connectDB, closeDB, sequelize, DataTypes, Model };

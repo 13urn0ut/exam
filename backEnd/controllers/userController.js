@@ -1,7 +1,7 @@
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../models/userModel");
+const { User } = require("../models");
 const AppError = require("../utils/appError");
 
 const signJWT = (id) => {

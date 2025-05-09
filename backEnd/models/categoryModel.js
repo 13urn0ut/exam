@@ -1,5 +1,5 @@
 const { sequelize, DataTypes, Model } = require("../DB/connectDB");
-const Item = require("./itemModel");
+// const Item = require("./itemModel");
 
 class Category extends Model {}
 
@@ -13,6 +13,7 @@ Category.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isIn: [["single", "group"]],
       },
@@ -21,9 +22,10 @@ Category.init(
   {
     sequelize,
     modelName: "category",
+    timestamps: false,
   }
 );
 
-Category.belongsTo(Item);
+// Category.belongsTo(Item);
 
-module.exports = Category;
+module.exports = { Category };

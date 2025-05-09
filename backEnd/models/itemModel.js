@@ -1,6 +1,4 @@
 const { sequelize, DataTypes, Model } = require("../DB/connectDB");
-const Category = require("./categoryModel");
-const Date = require("./dateModel");
 
 class Item extends Model {}
 
@@ -11,23 +9,34 @@ Item.init(
       autoIncrement: true,
       primaryKey: true,
     },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
+
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
     image: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "default.jpg",
     },
+
     duration: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+
     price: {
       type: DataTypes.DECIMAL(6, 2),
       allowNull: false,
     },
+
     ratting: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -40,7 +49,4 @@ Item.init(
   }
 );
 
-Item.hasOne(Category);
-Item.belongsToMany(Date, { through: "item_date" });
-
-module.exports = Item;
+module.exports = { Item };
