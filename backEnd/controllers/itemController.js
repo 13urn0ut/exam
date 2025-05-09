@@ -1,9 +1,11 @@
-const { Item } = require("../models");
+const { Item, Category, Date } = require("../models");
 const AppError = require("../utils/appError");
 
 exports.getAllItems = async (req, res, next) => {
   try {
-    const items = await Item.findAll();
+    const items = await Item.findAll({
+      include: [{ model: Category }, { model: Date }],
+    });
     res.status(200).json({ status: "success", data: items });
   } catch (error) {
     next(new AppError(error.message, 400));

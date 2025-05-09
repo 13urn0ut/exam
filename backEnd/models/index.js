@@ -2,7 +2,7 @@ const { User } = require("./userModel");
 const { Item } = require("./itemModel");
 const { Category } = require("./categoryModel");
 const { Date } = require("./dateModel");
-// require("./associations");
+require("./associations");
 
 module.exports = {
   User,
