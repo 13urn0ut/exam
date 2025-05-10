@@ -12,7 +12,7 @@ Order.init(
   },
   {
     sequelize,
-    modelName: "user_item",
+    modelName: "order",
   }
 );
 

@@ -17,6 +17,9 @@ Order.belongsTo(User);
 Item.hasMany(Order);
 Order.belongsTo(Item);
 
+Date.hasMany(Order);
+Order.belongsTo(Date);
+
 User.hasMany(Review);
 Review.belongsTo(User);
 
