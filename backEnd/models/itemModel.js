@@ -32,8 +32,8 @@ Item.init(
       allowNull: false,
     },
 
-    ratting: {
-      type: DataTypes.INTEGER,
+    rating: {
+      type: DataTypes.FLOAT,
       allowNull: false,
       defaultValue: 0,
     },

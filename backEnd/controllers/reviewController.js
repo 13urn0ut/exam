@@ -32,14 +32,16 @@ exports.createReview = async (req, res, next) => {
 
       const item = await Item.findByPk(itemId);
 
-      const avgRating = await Review.findAll({
+      const [avgRating] = await Review.findAll({
         where: { itemId },
         attributes: [[sequelize.fn("AVG", sequelize.col("rating")), "rating"]],
+        raw: true,
       });
 
-      await item.update({
-        rating: avgRating,
-      });
+      console.log(avgRating);
+
+      await item.update(avgRating);
+      console.log(item);
 
       return review;
     });
