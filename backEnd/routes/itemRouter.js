@@ -11,7 +11,7 @@ const {
   checkCreateItemBody,
   checkUpdateItemBody,
 } = require("../validators/checkItemBody");
-const { checkItemParams } = require("../validators/checkItemParams");
+const { checkItemId } = require("../validators/checkItemParams");
 const validate = require("../validators/validate");
 
 itemRouter.route("/").get(getAllItems);
@@ -26,21 +26,15 @@ itemRouter
   );
 itemRouter
   .route("/:id")
-  .get(checkItemParams, validate, getItemById)
+  .get(checkItemId, validate, getItemById)
   .patch(
     protect,
     allowAccessTo("admin"),
-    checkItemParams,
+    checkItemId,
     checkUpdateItemBody,
     validate,
     updateItem
   )
-  .delete(
-    protect,
-    allowAccessTo("admin"),
-    checkItemParams,
-    validate,
-    deleteItem
-  );
+  .delete(protect, allowAccessTo("admin"), checkItemId, validate, deleteItem);
 
 module.exports = itemRouter;
