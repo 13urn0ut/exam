@@ -1,15 +1,15 @@
 const { param } = require("express-validator");
-const { User } = require("../models");
+const { Item } = require("../models");
 
-exports.checkUserId = [
+exports.checkItemId = [
   param("id")
     .isInt()
     .withMessage("Invalid id")
     .custom(async (id) => {
-      const user = await User.findByPk(id);
+      const item = await Item.findByPk(id);
 
-      if (!user) {
-        throw new Error("User not found");
+      if (!item) {
+        throw new Error("Item not found");
       }
 
       return true;
