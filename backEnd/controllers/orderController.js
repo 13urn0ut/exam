@@ -42,8 +42,6 @@ exports.createOrder = async (req, res, next) => {
     const { id: userId } = req.user;
     const { itemId } = req.body;
 
-    console.log(Order);
-
     const newOrder = await Order.create({ userId, itemId });
 
     res.status(201).json({ status: "success", data: newOrder });
@@ -57,6 +55,7 @@ exports.updateOrder = async (req, res, next) => {
     const { id: userId } = req.user;
     const { itemId } = req.body;
     const order = await Order.findByPk(req.params.id);
+
     await order.update({ userId, itemId });
 
     res.status(200).json({ status: "success", data: order });
