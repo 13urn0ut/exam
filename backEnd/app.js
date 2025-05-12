@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const errorHandler = require("./utils/errorHandler");
 const userRouter = require("./routes/userRouter");
 const itemRouter = require("./routes/itemRouter");
+const orderRouter = require("./routes/orderRouter");
 const AppError = require("./utils/appError");
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/items", itemRouter);
+app.use("/api/v1/orders", orderRouter);
 
 app.all("/*name", (req, res, next) =>
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404))
