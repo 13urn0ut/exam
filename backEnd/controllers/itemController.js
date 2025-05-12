@@ -14,7 +14,9 @@ exports.getAllItems = async (req, res, next) => {
 
 exports.getItemById = async (req, res, next) => {
   try {
-    const item = await Item.findByPk(req.params.id);
+    const item = await Item.findByPk(req.params.id, {
+      include: [{ model: Category }, { model: Date }],
+    });
     res.status(200).json({ status: "success", data: item });
   } catch (error) {
     next(new AppError(error.message, 400));
