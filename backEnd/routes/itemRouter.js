@@ -6,6 +6,7 @@ const {
   updateItem,
   deleteItem,
 } = require("../controllers/itemController");
+const { getReviewsByItem } = require("../controllers/reviewController");
 const { protect, allowAccessTo } = require("../controllers/userController");
 const {
   checkCreateItemBody,
@@ -37,5 +38,7 @@ itemRouter
     updateItem
   )
   .delete(protect, allowAccessTo("admin"), checkItemId, validate, deleteItem);
+
+itemRouter.route("/:id/reviews").get(checkItemId, validate, getReviewsByItem);
 
 module.exports = itemRouter;

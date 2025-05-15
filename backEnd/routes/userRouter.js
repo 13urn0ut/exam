@@ -1,4 +1,5 @@
 const userRouter = require("express").Router();
+const { getReviewsByUser } = require("../controllers/reviewController");
 const {
   signupUser,
   loginUser,
@@ -30,5 +31,7 @@ userRouter
   .get(validate, getUserById)
   .patch(checkUpdateUserBody, validate, updateUser)
   .delete(validate, deleteUser);
+
+userRouter.route("/:id/reviews").get(checkUserId, validate, getReviewsByUser);
 
 module.exports = userRouter;

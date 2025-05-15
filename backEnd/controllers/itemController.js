@@ -14,11 +14,11 @@ exports.getAllItems = async (req, res, next) => {
 
   const queryObj = {};
 
-  const querFields = Object.keys(req.query).filter(
+  const queryFields = Object.keys(req.query).filter(
     (field) => !excludedFields.includes(field)
   );
 
-  querFields.forEach((field) => {
+  queryFields.forEach((field) => {
     if (field === "name") {
       queryObj.name = {
         [Op.iLike]: `%${req.query[field]}%`,
