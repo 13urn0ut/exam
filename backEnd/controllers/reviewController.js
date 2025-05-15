@@ -10,6 +10,8 @@ exports.getAllReviews = async (req, res, next) => {
     order = "DESC",
   } = req.query;
 
+  console.log(req.query);
+
   try {
     const reviews = await Review.findAll({
       page,
