@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Context } from "../contexts/Context";
 import toast from "react-hot-toast";
 
@@ -114,6 +114,17 @@ const SignupLoginForm = ({ action }) => {
         )}
 
         <button type="submit">{action.toUpperCase()}</button>
+
+        <div>
+          <p>
+            {action === "login"
+              ? "Don't have an account?"
+              : "Already have an account?"}
+          </p>
+          <Link to={action === "login" ? "/signup" : "/login"}>
+            {action === "login" ? "Signup" : "Login"}
+          </Link>
+        </div>
       </form>
     </>
   );

@@ -8,6 +8,26 @@
   --color-error: #e74c3c;
 }
 
+.header {
+  @apply bg-bg-secondary text-bg-primary p-4;
+
+  .nav {
+    @apply flex justify-between items-center;
+  }
+}
+
+.main {
+  @apply p-4;
+}
+
+.footer {
+  @apply bg-bg-secondary text-bg-primary py-4;
+
+  .container {
+    @apply mx-auto text-center;
+  }
+}
+
 .signup-form,
 .login-form {
   @apply flex flex-col gap-2 items-center;
@@ -35,11 +55,4 @@
 
 .item-preview-card {
   @apply grid grid-cols-2 gap-2 items-center border border-text-secondary rounded-md p-2;
-}
-.footer {
-  @apply bg-bg-secondary text-bg-primary py-4;
-
-  .container {
-    @apply mx-auto text-center;
-  }
 }

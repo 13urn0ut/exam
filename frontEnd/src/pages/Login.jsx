@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Main from "../components/Main";
 import Footer from "../components/Footer";
 import SignupLoginForm from "../components/SignupLoginForm";
 
@@ -6,10 +7,9 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div>
-        <h1>Login</h1>
+      <Main>
         <SignupLoginForm action="login" />
-      </div>
+      </Main>
       <Footer />
     </>
   );
