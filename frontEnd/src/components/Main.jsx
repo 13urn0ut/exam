@@ -1,5 +1,16 @@
+import { useContext } from "react";
+import { Context } from "../contexts/Context";
+
 const Main = ({ children }) => {
-  return <main className="main">{children}</main>;
+  const { loading, error } = useContext(Context);
+
+  return (
+    <main className="main">
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {children}
+    </main>
+  );
 };
 
 export default Main;

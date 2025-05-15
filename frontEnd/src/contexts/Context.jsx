@@ -35,7 +35,7 @@ const ContextProvider = ({ children }) => {
       }
     };
 
-    fetchUser();
+    if (!user) fetchUser();
   }, []);
   return <Context.Provider value={value}>{children}</Context.Provider>;
 };
