@@ -10,6 +10,7 @@ Category.init(
       autoIncrement: true,
       primaryKey: true,
     },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,

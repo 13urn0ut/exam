@@ -9,6 +9,7 @@ Review.init(
       autoIncrement: true,
       primaryKey: true,
     },
+
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -17,6 +18,7 @@ Review.init(
         max: 5,
       },
     },
+
     comment: {
       type: DataTypes.STRING,
       allowNull: false,

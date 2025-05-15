@@ -1,5 +1,4 @@
-const { Order, User } = require("../models");
-const { Item } = require("../models");
+const { Order, User, Item } = require("../models");
 const AppError = require("../utils/appError");
 
 exports.getAllOrders = async (req, res, next) => {
@@ -101,6 +100,7 @@ exports.updateOrder = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
     const { itemId } = req.body;
+
     const order = await Order.findByPk(req.params.id);
 
     await order.update({ userId, itemId });
@@ -114,6 +114,7 @@ exports.updateOrder = async (req, res, next) => {
 exports.deleteOrder = async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id);
+
     await order.destroy();
 
     res.status(200).json({ status: "success", data: order });

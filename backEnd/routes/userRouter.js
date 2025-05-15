@@ -22,10 +22,15 @@ const { checkReviewQuery } = require("../validators/checkReviewQuery");
 const validate = require("../validators/validate");
 
 userRouter.route("/").get(protect, allowAccessTo("admin"), getAllUsers);
+
 userRouter.route("/signup").post(checkSignupBody, validate, signupUser);
+
 userRouter.route("/login").post(checkLoginBody, validate, loginUser);
+
 userRouter.route("/logout").post(protect, logoutUser);
+
 userRouter.route("/me").get(getMe);
+
 userRouter
   .route("/:id")
   .all(protect, checkUserId)

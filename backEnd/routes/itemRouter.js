@@ -19,9 +19,9 @@ const { checkReviewQuery } = require("../validators/checkReviewQuery");
 const { checkOrderQuery } = require("../validators/checkOrderQuery");
 const validate = require("../validators/validate");
 
-itemRouter.route("/").get(checkItemQuery, validate, getAllItems);
 itemRouter
   .route("/")
+  .get(checkItemQuery, validate, getAllItems)
   .post(
     protect,
     allowAccessTo("admin"),
@@ -29,6 +29,7 @@ itemRouter
     validate,
     createItem
   );
+
 itemRouter
   .route("/:id")
   .get(checkItemId, validate, getItemById)

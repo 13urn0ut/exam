@@ -111,6 +111,7 @@ exports.getAllUsers = async (req, res, next) => {
       limit,
       order: [[orderBy, order]],
     });
+
     const userCount = await User.count();
 
     users.forEach((user) => {
@@ -147,7 +148,9 @@ exports.getMe = async (req, res, next) => {
 exports.getUserById = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
+
     user.password = undefined;
+
     res.status(200).json({ status: "success", data: user });
   } catch (error) {
     next(new AppError(error.message, 400));
@@ -166,6 +169,7 @@ exports.updateUser = async (req, res, next) => {
     });
 
     user.password = undefined;
+
     res.status(200).json({ status: "success", data: user });
   } catch (error) {
     next(new AppError(error.message, 400));
@@ -175,8 +179,11 @@ exports.updateUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
-    user.password = undefined;
+
     await user.destroy();
+
+    user.password = undefined;
+
     res.status(200).json({ status: "success", data: user });
   } catch (error) {
     next(new AppError(error.message, 400));
