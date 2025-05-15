@@ -37,7 +37,7 @@ const SignupLoginForm = ({ action }) => {
       });
       navigate("/");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (axios.isAxiosError(error)) {
         if (error.response) {
           setError(error.response.data.message);
