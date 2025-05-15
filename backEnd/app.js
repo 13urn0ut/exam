@@ -20,6 +20,8 @@ app.use(
   })
 );
 
+app.use(express.static("public"));
+
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/items", itemRouter);
 app.use("/api/v1/orders", orderRouter);

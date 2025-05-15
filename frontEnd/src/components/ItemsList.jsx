@@ -37,15 +37,16 @@ const ItemsList = () => {
     };
     fetchItems();
   }, []);
+
   return (
-    <div>
+    <section className="items-list">
       {items.map((item) => (
         <ItemPreviewCard
           key={item.id}
           item={item}
         />
       ))}
-    </div>
+    </section>
   );
 };
 
