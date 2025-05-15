@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+:root {
+  --color-bg-primary: #fff;
+  --color-text-primary: #333;
+  --color-text-secondary: #666;
+  --color-error: #e74c3c;
+}
+
+.signup-form,
+.login-form {
+  @apply flex flex-col gap-2 items-center;
+
+  div {
+    @apply flex flex-col gap-2 text-[var(--color-text-primary)] relative;
+
+    label {
+      @apply px-1 relative w-max z-10 top-5 left-2 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)];
+    }
+
+    input {
+      @apply p-2 pt-4 outline-none border border-[var(--color-text-secondary)] rounded-md autofill:bg-[var(--color-bg-primary)] autofill:duration-[9999s];
+    }
+  }
+}
+
+.form-error {
+  @apply text-[var(--color-error)] text-right pr-1;
+}
+
+.error {
+  @apply text-xl text-[var(--color-error)] text-center;
+}

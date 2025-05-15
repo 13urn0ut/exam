@@ -129,7 +129,16 @@ exports.getAllUsers = async (req, res, next) => {
 exports.getMe = async (req, res, next) => {
   try {
     const token = req.cookies?.jwt;
+
+    if (!token) {
+      return res.status(200).json({ status: "success", data: null });
+    }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!decoded) {
+      return res.status(200).json({ status: "success", data: null });
+    }
 
     const user = await User.findByPk(decoded?.id);
 
