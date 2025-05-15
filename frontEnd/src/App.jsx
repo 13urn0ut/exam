@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router";
+import { Toaster } from "react-hot-toast";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -9,6 +10,7 @@ const App = () => {
   return (
     <>
       <ContextProvider>
+        <Toaster />
         <Routes>
           <Route
             path="/"

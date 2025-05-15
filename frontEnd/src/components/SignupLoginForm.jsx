@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
+import { useNavigate } from "react-router";
 import { Context } from "../contexts/Context";
+import toast from "react-hot-toast";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const SignupLoginForm = ({ action }) => {
   const { setUser, error, setError } = useContext(Context);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -27,7 +31,13 @@ const SignupLoginForm = ({ action }) => {
 
       setUser(result.data);
       setError(null);
+      toast.success(`Welcome${action === "login" ? " back" : ""}!`, {
+        duration: 3000,
+        id: "success",
+      });
+      navigate("/");
     } catch (error) {
+      console.log(error);
       if (axios.isAxiosError(error)) {
         if (error.response) {
           setError(error.response.data.message);
