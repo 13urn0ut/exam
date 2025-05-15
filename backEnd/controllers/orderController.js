@@ -1,4 +1,4 @@
-const { Order } = require("../models");
+const { Order, User } = require("../models");
 const { Item } = require("../models");
 const AppError = require("../utils/appError");
 
@@ -24,7 +24,7 @@ exports.getAllOrders = async (req, res, next) => {
   }
 };
 
-exports.getAllOrdersByUser = async (req, res, next) => {
+exports.getOrdersByUser = async (req, res, next) => {
   const {
     page = 1,
     limit = 10,
@@ -37,6 +37,30 @@ exports.getAllOrdersByUser = async (req, res, next) => {
     const orders = await Order.findAll({
       where: { userId },
       include: [{ model: Item }],
+      page,
+      limit,
+      order: [[orderBy, order]],
+    });
+
+    res.status(200).json({ status: "success", data: orders });
+  } catch (error) {
+    next(new AppError(error.message, 400));
+  }
+};
+
+exports.getOrdersByItem = async (req, res, next) => {
+  const {
+    page = 1,
+    limit = 10,
+    orderBy = "createdAt",
+    order = "DESC",
+  } = req.query;
+
+  try {
+    const { id: itemId } = req.params;
+    const orders = await Order.findAll({
+      where: { itemId },
+      include: [{ model: User, attributes: ["id", "email"] }],
       page,
       limit,
       order: [[orderBy, order]],

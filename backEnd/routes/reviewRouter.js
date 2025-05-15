@@ -12,11 +12,12 @@ const {
   checkUpdateReviewBody,
 } = require("../validators/checkReviewBody");
 const { checkReviewId } = require("../validators/checkReviewParams");
+const { checkReviewQuery } = require("../validators/checkReviewQuery");
 const validate = require("../validators/validate");
 
-reviewRouter.route("/").get(getAllReviews);
 reviewRouter
   .route("/")
+  .get(checkReviewQuery, validate, getAllReviews)
   .post(
     protect,
     allowAccessTo("user"),

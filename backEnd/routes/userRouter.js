@@ -18,6 +18,7 @@ const {
   checkUpdateUserBody,
 } = require("../validators/checkUserBody");
 const { checkUserId } = require("../validators/checkUserParams");
+const { checkReviewQuery } = require("../validators/checkReviewQuery");
 const validate = require("../validators/validate");
 
 userRouter.route("/").get(protect, allowAccessTo("admin"), getAllUsers);
@@ -32,6 +33,8 @@ userRouter
   .patch(checkUpdateUserBody, validate, updateUser)
   .delete(validate, deleteUser);
 
-userRouter.route("/:id/reviews").get(checkUserId, validate, getReviewsByUser);
+userRouter
+  .route("/:id/reviews")
+  .get(checkUserId, checkReviewQuery, validate, getReviewsByUser);
 
 module.exports = userRouter;
