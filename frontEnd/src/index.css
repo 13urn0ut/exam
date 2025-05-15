@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
-:root {
+@theme {
   --color-bg-primary: #fff;
+  --color-bg-secondary: #454545;
   --color-text-primary: #333;
   --color-text-secondary: #666;
   --color-error: #e74c3c;
@@ -12,26 +13,33 @@
   @apply flex flex-col gap-2 items-center;
 
   div {
-    @apply flex flex-col gap-2 text-[var(--color-text-primary)] relative;
+    @apply flex flex-col gap-2 text-text-primary relative;
 
     label {
-      @apply px-1 relative w-max z-10 top-5 left-2 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)];
+      @apply px-1 relative w-max z-10 top-5 left-2 bg-bg-primary text-text-secondary;
     }
 
     input {
-      @apply p-2 pt-4 outline-none border border-[var(--color-text-secondary)] rounded-md autofill:bg-[var(--color-bg-primary)] autofill:duration-[9999s];
+      @apply p-2 pt-4 outline-none border border-text-secondary rounded-md autofill:bg-bg-primary autofill:duration-[9999s];
     }
   }
 }
 
 .form-error {
-  @apply text-[var(--color-error)] text-right pr-1;
+  @apply text-error text-right pr-1;
 }
 
 .error {
-  @apply text-xl text-[var(--color-error)] text-center;
+  @apply text-xl text-error text-center;
 }
 
 .item-preview-card {
-  @apply grid grid-cols-2 gap-2 items-center border border-[var(--color-text-secondary)] rounded-md p-2;
+  @apply grid grid-cols-2 gap-2 items-center border border-text-secondary rounded-md p-2;
+}
+.footer {
+  @apply bg-bg-secondary text-bg-primary py-4;
+
+  .container {
+    @apply mx-auto text-center;
+  }
 }
