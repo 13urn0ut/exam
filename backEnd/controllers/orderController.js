@@ -3,8 +3,21 @@ const { Item } = require("../models");
 const AppError = require("../utils/appError");
 
 exports.getAllOrders = async (req, res, next) => {
+  const {
+    page = 1,
+    limit = 10,
+    orderBy = "createdAt",
+    order = "DESC",
+  } = req.query;
+
   try {
-    const orders = await Order.findAll({ include: [{ model: Item }] });
+    const orders = await Order.findAll({
+      include: [{ model: Item }],
+      page,
+      limit,
+      order: [[orderBy, order]],
+    });
+
     res.status(200).json({ status: "success", data: orders });
   } catch (error) {
     next(new AppError(error.message, 400));
@@ -12,11 +25,21 @@ exports.getAllOrders = async (req, res, next) => {
 };
 
 exports.getAllOrdersByUser = async (req, res, next) => {
+  const {
+    page = 1,
+    limit = 10,
+    orderBy = "createdAt",
+    order = "DESC",
+  } = req.query;
+
   try {
     const { id: userId } = req.user;
     const orders = await Order.findAll({
       where: { userId },
       include: [{ model: Item }],
+      page,
+      limit,
+      order: [[orderBy, order]],
     });
 
     res.status(200).json({ status: "success", data: orders });

@@ -98,8 +98,19 @@ exports.allowAccessTo = (...roles) => {
 };
 
 exports.getAllUsers = async (req, res, next) => {
+  const {
+    page = 1,
+    limit = 10,
+    orderBy = "createdAt",
+    order = "DESC",
+  } = req.query;
+
   try {
-    const users = await User.findAll({ order: [["createdAt", "DESC"]] });
+    const users = await User.findAll({
+      page,
+      limit,
+      order: [[orderBy, order]],
+    });
     const userCount = await User.count();
 
     users.forEach((user) => {
