@@ -40,7 +40,7 @@
     }
 
     input {
-      @apply p-2 pt-4 outline-none border border-text-secondary rounded-md autofill:bg-bg-primary autofill:duration-[9999s];
+      @apply p-2 pt-4 outline-none border border-text-secondary rounded-md;
     }
   }
 }
@@ -54,5 +54,21 @@
 }
 
 .item-preview-card {
-  @apply grid grid-cols-2 gap-2 items-center border border-text-secondary rounded-md p-2;
+  @apply grid grid-cols-2 gap-2 items-center border border-text-secondary rounded-md p-2 min-h-max h-[30dvh] max-h-[30dvh];
+
+  .img-container {
+    @apply w-full h-full overflow-hidden rounded-md;
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+}
+
+input {
+  @apply autofill:bg-bg-primary autofill:duration-[9999s];
+}
+
+button {
+  @apply cursor-pointer;
 }

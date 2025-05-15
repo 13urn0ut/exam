@@ -1,25 +1,11 @@
 import { useForm } from "react-hook-form";
-// import { useSearchParams } from "react-router";
 import { CiSearch } from "react-icons/ci";
 
-const Search = ({ setSearchQuery }) => {
-  const {
-    register,
-    // watch,
-    // formState: { errors },
-    handleSubmit,
-  } = useForm();
-
-  const searchParams = new URLSearchParams({});
+const Search = ({ setQuery }) => {
+  const { register, handleSubmit } = useForm();
 
   const search = (data) => {
-    Object.entries(data).forEach(([key, value]) => {
-      if (value) {
-        searchParams.set(key, value);
-      }
-    });
-
-    setSearchQuery(searchParams.toString());
+    setQuery((prev) => ({ ...prev, ...data, page: 1 }));
   };
 
   return (
@@ -39,6 +25,7 @@ const Search = ({ setSearchQuery }) => {
         id="limit"
         placeholder="Limit"
         {...register("limit")}
+        defaultValue={10}
       />
       <button type="submit">
         <CiSearch />

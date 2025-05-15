@@ -3,10 +3,12 @@ const VITE_PUBLIC_URL = import.meta.env.VITE_PUBLIC_URL;
 const ItemPreviewCard = ({ item }) => {
   return (
     <article className="item-preview-card">
-      <img
-        src={`${VITE_PUBLIC_URL}/imgs/${item.image || "default.jpg"}`}
-        alt={item.name}
-      />
+      <div className="img-container">
+        <img
+          src={`${VITE_PUBLIC_URL}/imgs/${item.image || "default.jpg"}`}
+          alt={item.name}
+        />
+      </div>
       <div>
         <h3>{item.name}</h3>
         <p>Price: {item.price}</p>

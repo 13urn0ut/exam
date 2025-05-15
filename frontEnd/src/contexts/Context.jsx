@@ -9,6 +9,12 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState({
+    page: 1,
+    limit: 10,
+    orderBy: "createdAt",
+    order: "DESC",
+  });
 
   const value = {
     user,
@@ -17,6 +23,8 @@ const ContextProvider = ({ children }) => {
     setError,
     loading,
     setLoading,
+    query,
+    setQuery,
   };
 
   useEffect(() => {
