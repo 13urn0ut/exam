@@ -24,30 +24,49 @@ exports.getAllItems = async (req, res, next) => {
         [Op.iLike]: `%${req.query[field]}%`,
       };
     }
+
+    if (field === "minDuration") {
+      queryObj.duration = {
+        ...queryObj.duration,
+        [Op.gte]: req.query[field],
+      };
+    }
+
+    if (field === "maxDuration") {
+      queryObj.duration = {
+        ...queryObj.duration,
+        [Op.lte]: req.query[field],
+      };
+    }
+
     if (field === "minPrice") {
       queryObj.price = {
         ...queryObj.price,
         [Op.gte]: req.query[field],
       };
     }
+
     if (field === "maxPrice") {
       queryObj.price = {
         ...queryObj.price,
         [Op.lte]: req.query[field],
       };
     }
+
     if (field === "minRating") {
       queryObj.rating = {
         ...queryObj.rating,
         [Op.gte]: req.query[field],
       };
     }
+
     if (field === "maxRating") {
       queryObj.rating = {
         ...queryObj.rating,
         [Op.lte]: req.query[field],
       };
     }
+
     if (field === "categoryId") {
       queryObj.categoryId = req.query[field];
     }

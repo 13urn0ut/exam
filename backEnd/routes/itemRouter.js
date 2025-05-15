@@ -12,9 +12,10 @@ const {
   checkUpdateItemBody,
 } = require("../validators/checkItemBody");
 const { checkItemId } = require("../validators/checkItemParams");
+const { checkItemQuery } = require("../validators/checkItemQuery");
 const validate = require("../validators/validate");
 
-itemRouter.route("/").get(getAllItems);
+itemRouter.route("/").get(checkItemQuery, validate, getAllItems);
 itemRouter
   .route("/")
   .post(
