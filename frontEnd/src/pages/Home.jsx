@@ -1,11 +1,16 @@
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import ItemsList from "../components/ItemsList";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <ItemsList />
-    </div>
+    <>
+      <Header />
+      <div>
+        <ItemsList />
+      </div>
+      <Footer />
+    </>
   );
 };
 

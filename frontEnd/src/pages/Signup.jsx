@@ -1,11 +1,17 @@
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import SignupLoginForm from "../components/SignupLoginForm";
 
 const Signup = () => {
   return (
-    <div>
-      <h1>Signup</h1>
-      <SignupLoginForm action="signup" />
-    </div>
+    <>
+      <Header />
+      <div>
+        <h1>Signup</h1>
+        <SignupLoginForm action="signup" />
+      </div>
+      <Footer />
+    </>
   );
 };
 
