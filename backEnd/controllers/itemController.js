@@ -1,12 +1,67 @@
+const { Op } = require("sequelize");
 const { Item, Category } = require("../models");
 const AppError = require("../utils/appError");
 
 exports.getAllItems = async (req, res, next) => {
+  const {
+    limit = 10,
+    page = 1,
+    orderBy = "createdAt",
+    order = "DESC",
+  } = req.query;
+
+  const excludedFields = ["page", "limit", "orderBy", "order"];
+
+  const queryObj = {};
+
+  const querFields = Object.keys(req.query).filter(
+    (field) => !excludedFields.includes(field)
+  );
+
+  querFields.forEach((field) => {
+    if (field === "name") {
+      queryObj.name = {
+        [Op.iLike]: `%${req.query[field]}%`,
+      };
+    }
+    if (field === "minPrice") {
+      queryObj.price = {
+        ...queryObj.price,
+        [Op.gte]: req.query[field],
+      };
+    }
+    if (field === "maxPrice") {
+      queryObj.price = {
+        ...queryObj.price,
+        [Op.lte]: req.query[field],
+      };
+    }
+    if (field === "minRating") {
+      queryObj.rating = {
+        ...queryObj.rating,
+        [Op.gte]: req.query[field],
+      };
+    }
+    if (field === "maxRating") {
+      queryObj.rating = {
+        ...queryObj.rating,
+        [Op.lte]: req.query[field],
+      };
+    }
+    if (field === "categoryId") {
+      queryObj.categoryId = req.query[field];
+    }
+  });
+
   try {
     const items = await Item.findAll({
+      where: queryObj,
+      limit,
+      offset: (page - 1) * limit,
+      order: [[orderBy, order]],
       include: [{ model: Category }],
     });
-    const itemCount = await Item.count();
+    const itemCount = await Item.count({ where: queryObj });
 
     res
       .status(200)

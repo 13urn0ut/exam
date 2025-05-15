@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
+const { Sequelize, DataTypes, Model, Op } = require("sequelize");
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -23,4 +23,4 @@ const closeDB = async () => {
   console.log("Connection has been closed successfully.");
 };
 
-module.exports = { connectDB, closeDB, sequelize, DataTypes, Model };
+module.exports = { connectDB, closeDB, sequelize, DataTypes, Model, Op };
