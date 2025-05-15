@@ -33,7 +33,7 @@ Item.init(
     },
 
     rating: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(2, 1),
       allowNull: false,
       defaultValue: 0,
     },
