@@ -17,7 +17,14 @@ Review.init(
         len: [1, 200],
       },
     },
+
+    blocked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
+
   {
     sequelize,
     modelName: "review",

@@ -31,6 +31,12 @@ Item.init(
       type: DataTypes.DECIMAL(6, 2),
       allowNull: false,
     },
+
+    blocked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     sequelize,

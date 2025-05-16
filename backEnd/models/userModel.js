@@ -37,6 +37,12 @@ User.init(
         isIn: [["user", "admin"]],
       },
     },
+
+    blocked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   { sequelize, modelName: "user" }
 );
