@@ -35,7 +35,7 @@ itemRouter
   .get(checkItemId, validate, getItemById)
   .patch(
     protect,
-    allowAccessTo("user"),
+    allowAccessTo("user", "admin"),
     checkItemId,
     checkUpdateItemBody,
     validate,

@@ -58,6 +58,8 @@ exports.checkUpdateItemBody = [
 
   body("description").trim().optional(),
 
+  body("blocked").trim().optional(),
+
   body("image").trim().optional(),
 
   checkExact([], {

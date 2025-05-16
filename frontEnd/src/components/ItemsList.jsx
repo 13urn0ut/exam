@@ -16,6 +16,7 @@ const ItemsList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       const queryString = Object.entries(query)
+        .filter((el) => el[1] !== "")
         .map(([key, value]) => `${key}=${value}`)
         .join("&");
 
