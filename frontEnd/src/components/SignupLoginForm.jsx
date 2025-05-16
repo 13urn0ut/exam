@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const SignupLoginForm = ({ action }) => {
-  const { setUser, error, setError } = useContext(Context);
+  const { user, setUser, error, setError } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -35,7 +35,8 @@ const SignupLoginForm = ({ action }) => {
         duration: 3000,
         id: "success",
       });
-      navigate("/");
+
+      navigate("/home");
     } catch (error) {
       // console.log(error);
       if (axios.isAxiosError(error)) {
@@ -54,10 +55,7 @@ const SignupLoginForm = ({ action }) => {
 
   return (
     <>
-      <form
-        className={`${action}-form`}
-        onSubmit={handleSubmit(submit)}
-      >
+      <form className={`${action}-form`} onSubmit={handleSubmit(submit)}>
         {error && <p className="error">{error}</p>}
         <div>
           <label htmlFor="email">Email</label>

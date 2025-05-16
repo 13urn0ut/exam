@@ -16,8 +16,9 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoutes />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
           </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </ContextProvider>

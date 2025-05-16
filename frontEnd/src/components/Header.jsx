@@ -21,7 +21,7 @@ const Header = () => {
       );
 
       setUser(null);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="nav">
-        <NavLink to="/">MyApp</NavLink>
+        <NavLink to="/home">MyApp</NavLink>
 
         {user ? (
           <NavLink onClick={logout}>Logout</NavLink>
