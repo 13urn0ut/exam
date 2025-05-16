@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import { Context, ContextProvider } from "./contexts/Context";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const App = () => {
   return (
@@ -12,22 +13,12 @@ const App = () => {
       <ContextProvider>
         <Toaster />
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/signup"
-            element={<Signup />}
-          />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ContextProvider>
     </>
