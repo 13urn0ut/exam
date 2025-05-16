@@ -1,12 +1,12 @@
 const { param } = require("express-validator");
-const { Order } = require("../models");
+const { Bookmark } = require("../models");
 
-exports.checkOrderId = [
+exports.checkBookmarkId = [
   param("id")
     .isInt()
     .withMessage("Invalid id")
     .custom(async (id) => {
-      const order = await Order.findByPk(id);
+      const bookmark = await Bookmark.findByPk(id);
 
       if (!order) {
         throw new Error("Order not found");

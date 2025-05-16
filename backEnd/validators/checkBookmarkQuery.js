@@ -1,15 +1,15 @@
 const { query, checkExact } = require("express-validator");
-const { Order } = require("../models");
+const { Bookmark } = require("../models");
 
-exports.checkOrderQuery = [
+exports.checkBookmarkQuery = [
   query("page")
     .optional()
     .isInt({ min: 1 })
     .withMessage("Invalid page")
     .custom(async (value, { req }) => {
-      const totalOrders = await Order.count();
+      const totalBookmarks = await Bookmark.count();
       if (
-        value > Math.ceil(totalOrders / (req.query.limit || 10)) &&
+        value > Math.ceil(totalBookmarks / (req.query.limit || 10)) &&
         +value !== 1
       ) {
         throw new Error("Invalid page");

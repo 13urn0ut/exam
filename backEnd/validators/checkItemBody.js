@@ -19,7 +19,10 @@ exports.checkCreateItemBody = [
 
   body("categoryId").trim().isInt().withMessage("Item category is required"),
 
-  body("duration").trim().isInt().withMessage("Item duration is required"),
+  body("description")
+    .trim()
+    .notEmpty()
+    .withMessage("Item description is required"),
 
   body("image").trim().notEmpty().withMessage("Item image is required"),
 
@@ -53,7 +56,7 @@ exports.checkUpdateItemBody = [
 
   body("categoryId").trim().optional(),
 
-  body("duration").trim().optional(),
+  body("description").trim().optional(),
 
   body("image").trim().optional(),
 

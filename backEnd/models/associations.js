@@ -1,17 +1,17 @@
 const { Item } = require("./itemModel");
 const { Category } = require("./categoryModel");
 const { User } = require("./userModel");
-const { Order } = require("./orderModel");
+const { Bookmark } = require("./bookmarkModel");
 const { Review } = require("./reviewModel");
 
 Category.hasMany(Item);
 Item.belongsTo(Category);
 
-User.hasMany(Order);
-Order.belongsTo(User);
+User.hasMany(Bookmark);
+Bookmark.belongsTo(User);
 
-Item.hasMany(Order);
-Order.belongsTo(Item);
+Item.hasMany(Bookmark);
+Bookmark.belongsTo(Item);
 
 User.hasMany(Review);
 Review.belongsTo(User);

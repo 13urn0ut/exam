@@ -94,21 +94,9 @@ exports.getReviewsByItem = async (req, res, next) => {
 exports.createReview = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
-    const { itemId, rating, comment } = req.body;
+    const { itemId, comment } = req.body;
 
-    const newReview = await Review.create({ userId, itemId, rating, comment });
-
-    const item = await Item.findByPk(newReview.itemId);
-
-    const [avgRating] = await Review.findAll({
-      attributes: [
-        [Review.sequelize.fn("AVG", Review.sequelize.col("rating")), "rating"],
-      ],
-      where: { itemId: item.id },
-      raw: true,
-    });
-
-    await item.update(avgRating);
+    const newReview = await Review.create({ userId, itemId, comment });
 
     res.status(201).json({ status: "success", data: newReview });
   } catch (error) {
@@ -122,18 +110,6 @@ exports.updateReview = async (req, res, next) => {
 
     await review.update(req.body);
 
-    const item = await Item.findByPk(review.itemId);
-
-    const [avgRating] = await Review.findAll({
-      attributes: [
-        [Review.sequelize.fn("AVG", Review.sequelize.col("rating")), "rating"],
-      ],
-      where: { itemId: item.id },
-      raw: true,
-    });
-
-    await item.update(avgRating);
-
     res.status(200).json({ status: "success", data: review });
   } catch (error) {
     next(new AppError(error.message, 400));
@@ -145,18 +121,6 @@ exports.deleteReview = async (req, res, next) => {
     const review = await Review.findByPk(req.params.id);
 
     await review.destroy();
-
-    const item = await Item.findByPk(review.itemId);
-
-    const [avgRating] = await Review.findAll({
-      attributes: [
-        [Review.sequelize.fn("AVG", Review.sequelize.col("rating")), "rating"],
-      ],
-      where: { itemId: item.id },
-      raw: true,
-    });
-
-    await item.update({ rating: avgRating.rating || 0 });
 
     res.status(200).json({ status: "success", data: review });
   } catch (error) {

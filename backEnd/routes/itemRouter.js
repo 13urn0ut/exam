@@ -7,7 +7,7 @@ const {
   deleteItem,
 } = require("../controllers/itemController");
 const { getReviewsByItem } = require("../controllers/reviewController");
-const { getOrdersByItem } = require("../controllers/orderController");
+const { getBookmarksByItem } = require("../controllers/bookmarkController");
 const { protect, allowAccessTo } = require("../controllers/userController");
 const {
   checkCreateItemBody,
@@ -16,7 +16,7 @@ const {
 const { checkItemId } = require("../validators/checkItemParams");
 const { checkItemQuery } = require("../validators/checkItemQuery");
 const { checkReviewQuery } = require("../validators/checkReviewQuery");
-const { checkOrderQuery } = require("../validators/checkOrderQuery");
+const { checkBookmarkQuery } = require("../validators/checkBookmarkQuery");
 const validate = require("../validators/validate");
 
 itemRouter
@@ -48,7 +48,7 @@ itemRouter
   .get(checkItemId, checkReviewQuery, validate, getReviewsByItem);
 
 itemRouter
-  .route("/:id/orders")
-  .get(checkItemId, checkOrderQuery, validate, getOrdersByItem);
+  .route("/:id/bookmarks")
+  .get(checkItemId, checkBookmarkQuery, validate, getBookmarksByItem);
 
 module.exports = itemRouter;

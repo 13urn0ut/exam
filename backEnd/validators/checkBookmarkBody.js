@@ -1,8 +1,8 @@
 const { body, checkExact } = require("express-validator");
-const { Order } = require("../models");
+const { Bookmark } = require("../models");
 const { Item } = require("../models");
 
-exports.checkCreateOrderBody = [
+exports.checkCreateBookmarkBody = [
   body("itemId")
     .trim()
     .isInt()
@@ -14,12 +14,12 @@ exports.checkCreateOrderBody = [
         throw new Error("Item not found");
       }
 
-      const order = await Order.findOne({
+      const bookmark = await Bookmark.findOne({
         where: { itemId, userId: req.user.id },
       });
 
-      if (order) {
-        throw new Error("Item already ordered");
+      if (bookmark) {
+        throw new Error("bookmark already ordered");
       }
 
       return true;
@@ -36,7 +36,7 @@ exports.checkCreateOrderBody = [
   }),
 ];
 
-exports.checkUpdateOrderBody = [
+exports.checkUpdateBookmarkBody = [
   body("itemId")
     .trim()
     .optional()
@@ -49,12 +49,12 @@ exports.checkUpdateOrderBody = [
         throw new Error("Item not found");
       }
 
-      const order = await Order.findOne({
+      const bookmark = await Bookmark.findOne({
         where: { itemId, userId: req.user.id },
       });
 
-      if (order) {
-        throw new Error("Item already ordered");
+      if (bookmark) {
+        throw new Error("bookmark already ordered");
       }
 
       return true;

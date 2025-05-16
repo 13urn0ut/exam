@@ -16,26 +16,20 @@ Item.init(
       unique: true,
     },
 
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
     image: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "default.jpg",
     },
 
-    duration: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
     price: {
       type: DataTypes.DECIMAL(6, 2),
       allowNull: false,
-    },
-
-    rating: {
-      type: DataTypes.DECIMAL(2, 1),
-      allowNull: false,
-      defaultValue: 0,
     },
   },
   {

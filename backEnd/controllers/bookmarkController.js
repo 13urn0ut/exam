@@ -1,7 +1,7 @@
-const { Order, User, Item } = require("../models");
+const { Bookmark, User, Item } = require("../models");
 const AppError = require("../utils/appError");
 
-exports.getAllOrders = async (req, res, next) => {
+exports.getAllBookmarks = async (req, res, next) => {
   const {
     page = 1,
     limit = 10,
@@ -10,20 +10,20 @@ exports.getAllOrders = async (req, res, next) => {
   } = req.query;
 
   try {
-    const orders = await Order.findAll({
+    const bookmarks = await Bookmark.findAll({
       include: [{ model: Item }],
       page,
       limit,
       order: [[orderBy, order]],
     });
 
-    res.status(200).json({ status: "success", data: orders });
+    res.status(200).json({ status: "success", data: bookmarks });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
 };
 
-exports.getOrdersByUser = async (req, res, next) => {
+exports.getBookmarksByUser = async (req, res, next) => {
   const {
     page = 1,
     limit = 10,
@@ -33,7 +33,7 @@ exports.getOrdersByUser = async (req, res, next) => {
 
   try {
     const { id: userId } = req.user;
-    const orders = await Order.findAll({
+    const bookmarks = await Bookmark.findAll({
       where: { userId },
       include: [{ model: Item }],
       page,
@@ -41,13 +41,13 @@ exports.getOrdersByUser = async (req, res, next) => {
       order: [[orderBy, order]],
     });
 
-    res.status(200).json({ status: "success", data: orders });
+    res.status(200).json({ status: "success", data: bookmarks });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
 };
 
-exports.getOrdersByItem = async (req, res, next) => {
+exports.getBookmarksByItem = async (req, res, next) => {
   const {
     page = 1,
     limit = 10,
@@ -57,7 +57,7 @@ exports.getOrdersByItem = async (req, res, next) => {
 
   try {
     const { id: itemId } = req.params;
-    const orders = await Order.findAll({
+    const bookmarks = await Bookmark.findAll({
       where: { itemId },
       include: [{ model: User, attributes: ["id", "email"] }],
       page,
@@ -65,59 +65,59 @@ exports.getOrdersByItem = async (req, res, next) => {
       order: [[orderBy, order]],
     });
 
-    res.status(200).json({ status: "success", data: orders });
+    res.status(200).json({ status: "success", data: bookmarks });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
 };
 
-exports.getOrderById = async (req, res, next) => {
+exports.getBookmarkById = async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id, {
+    const bookmark = await Bookmark.findByPk(req.params.id, {
       include: [{ model: Item }],
     });
 
-    res.status(200).json({ status: "success", data: order });
+    res.status(200).json({ status: "success", data: bookmark });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
 };
 
-exports.createOrder = async (req, res, next) => {
+exports.createBookmark = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
     const { itemId } = req.body;
 
-    const newOrder = await Order.create({ userId, itemId });
+    const newBookmark = await Bookmark.create({ userId, itemId });
 
-    res.status(201).json({ status: "success", data: newOrder });
+    res.status(201).json({ status: "success", data: newBookmark });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
 };
 
-exports.updateOrder = async (req, res, next) => {
+exports.updateBookmark = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
     const { itemId } = req.body;
 
-    const order = await Order.findByPk(req.params.id);
+    const bookmark = await Bookmark.findByPk(req.params.id);
 
-    await order.update({ userId, itemId });
+    await bookmark.update({ userId, itemId });
 
-    res.status(200).json({ status: "success", data: order });
+    res.status(200).json({ status: "success", data: Bookmark });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
 };
 
-exports.deleteOrder = async (req, res, next) => {
+exports.deleteBookmark = async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.params.id);
+    const bookmark = await Bookmark.findByPk(req.params.id);
 
-    await order.destroy();
+    await bookmark.destroy();
 
-    res.status(200).json({ status: "success", data: order });
+    res.status(200).json({ status: "success", data: bookmark });
   } catch (error) {
     next(new AppError(error.message, 400));
   }
