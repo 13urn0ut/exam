@@ -61,7 +61,7 @@ exports.getItemById = async (req, res, next) => {
 
 exports.createItem = async (req, res, next) => {
   try {
-    const newItem = await Item.create(req.body);
+    const newItem = await Item.create({ ...req.body, creatorId: req.user.id });
     res.status(201).json({ status: "success", data: newItem });
   } catch (error) {
     next(new AppError(error.message, 400));

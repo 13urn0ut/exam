@@ -1,6 +1,8 @@
 const VITE_PUBLIC_URL = import.meta.env.VITE_PUBLIC_URL;
 
 const ItemPreviewCard = ({ item }) => {
+  console.log(item);
+
   return (
     <article className="item-preview-card">
       <div className="img-container">
@@ -12,8 +14,7 @@ const ItemPreviewCard = ({ item }) => {
       <div>
         <h3>{item.name}</h3>
         <p>Price: {item.price}</p>
-        <p>Duration: {item.duration}</p>
-        <p>Rating: {item.rating}</p>
+        <p>Description: {item.description}</p>
         <p>Category: {item.category.name}</p>
       </div>
     </article>

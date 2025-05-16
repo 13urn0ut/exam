@@ -32,6 +32,11 @@ Item.init(
       allowNull: false,
     },
 
+    creatorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+
     blocked: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
