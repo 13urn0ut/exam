@@ -8,10 +8,12 @@ import Pagination from "./Pagination";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const ItemsList = () => {
-  const { setLoading, setError, query, setQuery } = useContext(Context);
+const ItemsList = ({ myItems }) => {
+  const { setLoading, setError, query, setQuery, user } = useContext(Context);
 
   const [items, setItems] = useState([]);
+
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -22,7 +24,7 @@ const ItemsList = () => {
 
       try {
         setLoading(true);
-        console.log(queryString);
+        console.log(`${queryString}${myItems ? `&creatorId=${user.id}` : ""}`);
 
         const { data: result } = await axios.get(
           `${API_URL}/items?${queryString}`,
@@ -50,13 +52,13 @@ const ItemsList = () => {
       }
     };
     fetchItems();
-  }, [query]);
+  }, [query, refresh]);
 
   return (
     <section className="items-list">
       <Search setQuery={setQuery} />
       {items.map((item) => (
-        <ItemPreviewCard key={item.id} item={item} />
+        <ItemPreviewCard key={item.id} item={item} setRefresh={setRefresh} />
       ))}
       <Pagination setQuery={setQuery} />
     </section>

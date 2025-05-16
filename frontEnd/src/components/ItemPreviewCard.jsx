@@ -5,7 +5,7 @@ import axios from "axios";
 const VITE_PUBLIC_URL = import.meta.env.VITE_PUBLIC_URL;
 const API_URL = import.meta.env.VITE_API_URL;
 
-const ItemPreviewCard = ({ item }) => {
+const ItemPreviewCard = ({ item, setRefresh }) => {
   const { user } = useContext(Context);
 
   const bookmark = async (itemId) => {
@@ -22,6 +22,8 @@ const ItemPreviewCard = ({ item }) => {
     }
   };
 
+  const editItem = () => {};
+
   const blockItem = async (itemId) => {
     try {
       await axios.patch(
@@ -31,6 +33,18 @@ const ItemPreviewCard = ({ item }) => {
           withCredentials: true,
         }
       );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteItem = async (itemId) => {
+    try {
+      await axios.delete(`${API_URL}/items/${itemId}`, {
+        withCredentials: true,
+      });
+
+      setRefresh((prev) => !prev);
     } catch (error) {
       console.log(error);
     }
@@ -57,8 +71,8 @@ const ItemPreviewCard = ({ item }) => {
             </div>
             {item.creatorId === user.id && (
               <div>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={editItem}>Edit</button>
+                <button onClick={() => deleteItem(item.id)}>Delete</button>
               </div>
             )}
           </>

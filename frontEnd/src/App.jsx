@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
 import Item from "./pages/Item";
+import MyItems from "./pages/MyItems";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/additem" element={<Item />} />
+            <Route path="/myitems" element={<MyItems />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
