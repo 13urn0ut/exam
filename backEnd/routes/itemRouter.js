@@ -24,7 +24,7 @@ itemRouter
   .get(checkItemQuery, validate, getAllItems)
   .post(
     protect,
-    allowAccessTo("admin"),
+    allowAccessTo("user"),
     checkCreateItemBody,
     validate,
     createItem
@@ -35,13 +35,19 @@ itemRouter
   .get(checkItemId, validate, getItemById)
   .patch(
     protect,
-    allowAccessTo("admin"),
+    allowAccessTo("user"),
     checkItemId,
     checkUpdateItemBody,
     validate,
     updateItem
   )
-  .delete(protect, allowAccessTo("admin"), checkItemId, validate, deleteItem);
+  .delete(
+    protect,
+    allowAccessTo("admin", "user"),
+    checkItemId,
+    validate,
+    deleteItem
+  );
 
 itemRouter
   .route("/:id/reviews")

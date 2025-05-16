@@ -68,10 +68,10 @@ const ItemForm = ({ action }) => {
       </div>
 
       <div>
-        <label htmlFor="category">Category</label>
+        <label htmlFor="categoryId">Category</label>
         <select
-          id="category"
-          {...register("category", {
+          id="categoryId"
+          {...register("categoryId", {
             required: {
               value: true,
               message: "Category is required",
