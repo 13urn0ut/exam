@@ -31,3 +31,5 @@ categoryRouter
   .all(protect, allowAccessTo("admin"), checkCategoryId)
   .patch(checkUpdateCategoryBody, validate, updateCategory)
   .delete(validate, deleteCategory);
+
+module.exports = categoryRouter;

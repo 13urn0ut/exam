@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Context } from "../contexts/Context";
+import SideNav from "./SideNav";
 
 const Main = ({ children }) => {
   const { loading, error } = useContext(Context);
@@ -7,8 +8,10 @@ const Main = ({ children }) => {
   return (
     <main className="main">
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {children}
+
+      <SideNav />
+      {error && <p className="error">{error}</p>}
+      <div className="content">{children}</div>
     </main>
   );
 };

@@ -2,18 +2,15 @@ import { useContext, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router";
 import { Context } from "../contexts/Context";
 
-const ProtectedRoutes = ({ children }) => {
-  const { user, loading } = useContext(Context);
-
+const ProtectedRoutes = () => {
+  const { user } = useContext(Context);
   const navigate = useNavigate();
-
-  console.log(user);
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      //   navigate("/login");
     }
-  }, [loading]);
+  }, []);
 
   return <Outlet />;
 };

@@ -6,6 +6,7 @@ const userRouter = require("./routes/userRouter");
 const itemRouter = require("./routes/itemRouter");
 const bookmarkRouter = require("./routes/bookmarkRouter");
 const reviewRouter = require("./routes/reviewRouter");
+const categoryRouter = require("./routes/categoryRouter");
 const AppError = require("./utils/appError");
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(express.static("public"));
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/items", itemRouter);
+app.use("/api/v1/categories", categoryRouter);
 app.use("/api/v1/bookmarks", bookmarkRouter);
 app.use("/api/v1/reviews", reviewRouter);
 

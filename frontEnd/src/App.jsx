@@ -1,11 +1,13 @@
 import { Routes, Route } from "react-router";
 import { Toaster } from "react-hot-toast";
+import { ContextProvider } from "./contexts/Context";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import NotFound from "./pages/NotFound";
-import { Context, ContextProvider } from "./contexts/Context";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Home from "./pages/Home";
+import AdminDashboard from "./pages/AdminDashboard";
+import Categories from "./pages/Categories";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/categories" element={<Categories />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
