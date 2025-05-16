@@ -9,6 +9,19 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const deleteCategory = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/categories/${id}`, {
+        withCredentials: true,
+      });
+
+      setRefresh((prev) => !prev);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -23,7 +36,7 @@ const Categories = () => {
       }
     };
     fetchCategories();
-  }, []);
+  }, [refresh]);
   return (
     <>
       <Header />
@@ -31,10 +44,15 @@ const Categories = () => {
         <h1>Categories</h1>
         <ul>
           {categories.map((category) => (
-            <li key={category.id}>{category.name}</li>
+            <li key={category.id}>
+              {category.name}{" "}
+              <button type="button" onClick={() => deleteCategory(category.id)}>
+                x
+              </button>
+            </li>
           ))}
         </ul>
-        <CategoryForm />
+        <CategoryForm setRefresh={setRefresh} />
       </Main>
       <Footer />
     </>

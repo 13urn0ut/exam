@@ -35,10 +35,10 @@
 .signup-form,
 .login-form,
 .form {
-  @apply flex flex-col gap-2 items-center;
+  @apply grid grid-cols-1 gap-4;
 
   div {
-    @apply flex flex-col gap-2 text-text-primary relative;
+    @apply flex flex-col gap-2 text-text-primary relative w-3/5 mx-auto;
 
     label {
       @apply px-1 relative w-max z-10 top-5 left-2 bg-bg-primary text-text-secondary;
@@ -46,6 +46,14 @@
 
     input {
       @apply p-2 pt-4 outline-none border border-text-secondary rounded-md;
+    }
+
+    select {
+      @apply p-2 pt-4 w-full outline-none border border-text-secondary rounded-md;
+    }
+
+    textarea {
+      @apply p-2 pt-4 w-full outline-none border border-text-secondary rounded-md;
     }
   }
 }

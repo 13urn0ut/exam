@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import AdminDashboard from "./pages/AdminDashboard";
 import Categories from "./pages/Categories";
 import NotFound from "./pages/NotFound";
+import Item from "./pages/Item";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/additem" element={<Item />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

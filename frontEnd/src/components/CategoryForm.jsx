@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { Context } from "../contexts/Context";
 const API_URL = import.meta.env.VITE_API_URL;
 
-const Categories = () => {
+const Categories = ({ setRefresh }) => {
   const {
     register,
     formState: { errors },
@@ -35,6 +35,8 @@ const Categories = () => {
         duration: 3000,
         id: "added",
       });
+
+      setRefresh((prev) => !prev);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
