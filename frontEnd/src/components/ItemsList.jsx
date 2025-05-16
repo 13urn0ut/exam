@@ -21,6 +21,7 @@ const ItemsList = () => {
 
       try {
         setLoading(true);
+        console.log(queryString);
 
         const { data: result } = await axios.get(
           `${API_URL}/items?${queryString}`,
@@ -54,10 +55,7 @@ const ItemsList = () => {
     <section className="items-list">
       <Search setQuery={setQuery} />
       {items.map((item) => (
-        <ItemPreviewCard
-          key={item.id}
-          item={item}
-        />
+        <ItemPreviewCard key={item.id} item={item} />
       ))}
       <Pagination setQuery={setQuery} />
     </section>

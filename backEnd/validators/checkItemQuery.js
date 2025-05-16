@@ -54,7 +54,10 @@ exports.checkItemQuery = [
     .custom(async (value, { req }) => {
       const totalItems = await Item.count();
 
-      if (value > Math.ceil(totalItems / (req.query.limit || 10))) {
+      if (
+        value > Math.ceil(totalItems / (req.query.limit || 10)) &&
+        +value !== 1
+      ) {
         throw new Error("Invalid page");
       }
       return true;

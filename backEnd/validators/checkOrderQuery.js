@@ -8,7 +8,10 @@ exports.checkOrderQuery = [
     .withMessage("Invalid page")
     .custom(async (value, { req }) => {
       const totalOrders = await Order.count();
-      if (value > Math.ceil(totalOrders / (req.query.limit || 10))) {
+      if (
+        value > Math.ceil(totalOrders / (req.query.limit || 10)) &&
+        +value !== 1
+      ) {
         throw new Error("Invalid page");
       }
       return true;

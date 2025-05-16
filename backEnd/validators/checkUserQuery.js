@@ -8,7 +8,10 @@ exports.checkUserQuery = [
     .withMessage("Invalid page")
     .custom(async (value, { req }) => {
       const totalUsers = await User.count();
-      if (value > Math.ceil(totalUsers / (req.query.limit || 10))) {
+      if (
+        value > Math.ceil(totalUsers / (req.query.limit || 10)) &&
+        +value !== 1
+      ) {
         throw new Error("Invalid page");
       }
       return true;

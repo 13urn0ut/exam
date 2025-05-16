@@ -8,7 +8,10 @@ exports.checkReviewQuery = [
     .withMessage("Invalid page")
     .custom(async (value, { req }) => {
       const totalRevies = await Review.count();
-      if (value > Math.ceil(totalRevies / (req.query.limit || 10))) {
+      if (
+        value > Math.ceil(totalRevies / (req.query.limit || 10)) &&
+        +value !== 1
+      ) {
         throw new Error("Invalid page");
       }
       return true;
